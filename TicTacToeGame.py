@@ -180,6 +180,7 @@ def play():
             else:
                 break
             
+play()
 
 #Version 2
 def playV2():
@@ -210,4 +211,4 @@ def playV2():
                 continue
             else:
                 break
-playV2()
+
