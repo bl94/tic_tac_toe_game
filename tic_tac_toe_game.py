@@ -20,7 +20,7 @@ def marker_choice():
     """
     player1_marker=""
     player2_marker=""
-    while player1_marker !="X" and player1_marker !="Y" :
+    while player1_marker not in ["X","Y"]:
         player1_marker=input("Player 1, choose character you want to be(X or Y) : ")
         if player1_marker=="X":
             player2_marker="Y"
@@ -44,21 +44,6 @@ def place_player_marker_choice(game_board,marker,position_list):
         else:
             print("Sorry wrong the number or position is not empty")
     return (game_board,position_list)
-
-def place_player_marker_choice_v2(game_board,marker):
-    """
-    Version 2 - function in which the players choose position on board - second solution
-    """
-    player_place_marker=0
-    while player_place_marker not in range(1,10) \
-        and not free_space_check(game_board,player_place_marker):
-        player_place_marker=int(input("Choose place where you want to put : "))
-        if player_place_marker in range(1,10)and not free_space_check(game_board,player_place_marker): #check if this position is empty
-            game_board[player_place_marker]=marker
-            break
-        else:
-            print("Sorry wrong the number or this position is not empty")
-    return game_board
 
 def win_check(game_board,marker1,marker2,position_list):
     """
@@ -85,52 +70,6 @@ def win_check(game_board,marker1,marker2,position_list):
         print("Congratulations. Win the player2")
         return True
     elif len(position_list)==0:
-        print("Nobody win")
-        return True
-
-def free_space_check(game_board,position):
-    """
-    Version 2 - function to check free place
-    """
-    for num in range(1,10):
-        if game_board[position]==str(num): #change 1
-            return True  #this place is empty
-    return False #this place is not empty
-
-def full_board_check(game_board):
-    """
-    Version 2 - function to check all places in the board are taken
-    """
-    for number in range(1,10):
-        if free_space_check(game_board,number):
-            return False #the board is not filled
-    return True #the board if full
-
-def win_check_v2(game_board,marker1,marker2):
-    """
-    #Version 2 - check if any of player win the game
-    """
-    if  (game_board[1]==marker1 and game_board[2]==marker1 and game_board[3]==marker1) or \
-        (game_board[4]==marker1 and game_board[5]==marker1 and game_board[6]==marker1) or \
-        (game_board[7]==marker1 and game_board[8]==marker1 and game_board[9]==marker1) or \
-        (game_board[1]==marker1 and game_board[4]==marker1 and game_board[7]==marker1) or \
-        (game_board[2]==marker1 and game_board[5]==marker1 and game_board[8]==marker1) or \
-        (game_board[3]==marker1 and game_board[6]==marker1 and game_board[9]==marker1) or \
-        (game_board[1]==marker1 and game_board[5]==marker1 and game_board[9]==marker1) or \
-        (game_board[3]==marker1 and game_board[5]==marker1 and game_board[7]==marker1):
-        print("Congratulations. Win the player1")
-        return True
-    elif(game_board[1]==marker2 and game_board[2]==marker2 and game_board[3]==marker2) or \
-        (game_board[4]==marker2 and game_board[5]==marker2 and game_board[6]==marker2) or \
-        (game_board[7]==marker2 and game_board[8]==marker2 and game_board[9]==marker2) or \
-        (game_board[1]==marker2 and game_board[4]==marker2 and game_board[7]==marker2) or \
-        (game_board[2]==marker2 and game_board[5]==marker2 and game_board[8]==marker2) or \
-        (game_board[3]==marker2 and game_board[6]==marker2 and game_board[9]==marker2) or \
-        (game_board[1]==marker2 and game_board[5]==marker2 and game_board[9]==marker2) or \
-        (game_board[3]==marker2 and game_board[5]==marker2 and game_board[7]==marker2):
-        print("Congratulations. Win the player2")
-        return True
-    elif full_board_check(game_board):
         print("Nobody win")
         return True
 
