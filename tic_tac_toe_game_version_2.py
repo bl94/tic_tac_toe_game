@@ -148,6 +148,7 @@ def try_again():
         else:
             print("Sorry wrong the character")
 
+# main function
 def main():
     """
     main function
@@ -186,3 +187,32 @@ def main():
             else:
                 break
 main()
+
+#Version 2
+def playV2():
+    game_board=["0","1","2","3","4","5","6","7","8","9"]
+    game_on=False
+    markers=marker_choice()
+    while game_on==False:
+        display_board(game_board)
+        print("Player 1")
+        game_board=place_player_marker_choice_v2(game_board,markers[0])
+        display_board(game_board)
+        end_game=win_check_v2(game_board,markers[0],markers[1])
+        if end_game==True:
+            play_again=try_again()
+            if play_again:
+                game_board=["0","1","2","3","4","5","6","7","8","9"]
+                continue
+            else:
+                break
+        print("Player 2")
+        game_board=place_player_marker_choice_v2(game_board,markers[1])
+        end_game=win_check_v2(game_board,markers[0],markers[1])
+        if end_game==True:
+            play_again=try_again()
+            if play_again:
+                game_board=["x","1","2","3","4","5","6","7","8","9"]
+                continue
+            else:
+                break
