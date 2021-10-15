@@ -57,7 +57,7 @@ def win_check(game_board,marker1,marker2,position_list):
         (game_board[3]==marker1 and game_board[6]==marker1 and game_board[9]==marker1) or \
         (game_board[1]==marker1 and game_board[5]==marker1 and game_board[9]==marker1) or \
         (game_board[3]==marker1 and game_board[5]==marker1 and game_board[7]==marker1):
-        print("Congratulations. Win the player1")
+        print("Congratulations. Win the player 1")
         return 1
     elif(game_board[1]==marker2 and game_board[2]==marker2 and game_board[3]==marker2) or \
         (game_board[4]==marker2 and game_board[5]==marker2 and game_board[6]==marker2) or \
@@ -67,7 +67,7 @@ def win_check(game_board,marker1,marker2,position_list):
         (game_board[3]==marker2 and game_board[6]==marker2 and game_board[9]==marker2) or \
         (game_board[1]==marker2 and game_board[5]==marker2 and game_board[9]==marker2) or \
         (game_board[3]==marker2 and game_board[5]==marker2 and game_board[7]==marker2):
-        print("Congratulations. Win the player2")
+        print("Congratulations. Win the player 2")
         return 2
     elif len(position_list)==0:
         print("Nobody win")
@@ -125,5 +125,6 @@ def main():
                 continue
             else:
                 break
-    return end_game #added line to make unittest
+    return end_game #return who win, 1-means win player one,2-means win player two
+
 main()
