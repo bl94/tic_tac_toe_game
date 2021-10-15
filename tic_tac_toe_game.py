@@ -16,15 +16,15 @@ def display_board(game_board):
 def marker_choice():
     """
     function in which the players choose character
-    mark position on the board
+    mark position in the board
     """
     player1_marker=""
     player2_marker=""
-    while player1_marker not in ["X","Y"]:
-        player1_marker=input("Player 1, choose character you want to be(X or Y) : ")
+    while player1_marker not in ["X","O"]:
+        player1_marker=input("Player 1, choose character you want to be (X or O) : ")
         if player1_marker=="X":
-            player2_marker="Y"
-        elif player1_marker=="Y":
+            player2_marker="O"
+        elif player1_marker=="O":
             player2_marker="X"
         else:
             print("Sorry you choose wrong character. Try again")
@@ -32,7 +32,7 @@ def marker_choice():
 
 def place_player_marker_choice(game_board,marker,position_list):
     """
-    function in which the players select position on board
+    function in which the players select position in the board
     """
     player_place_marker=""
     while player_place_marker not in position_list:
@@ -58,7 +58,7 @@ def win_check(game_board,marker1,marker2,position_list):
         (game_board[1]==marker1 and game_board[5]==marker1 and game_board[9]==marker1) or \
         (game_board[3]==marker1 and game_board[5]==marker1 and game_board[7]==marker1):
         print("Congratulations. Win the player1")
-        return True
+        return 1
     elif(game_board[1]==marker2 and game_board[2]==marker2 and game_board[3]==marker2) or \
         (game_board[4]==marker2 and game_board[5]==marker2 and game_board[6]==marker2) or \
         (game_board[7]==marker2 and game_board[8]==marker2 and game_board[9]==marker2) or \
@@ -68,14 +68,14 @@ def win_check(game_board,marker1,marker2,position_list):
         (game_board[1]==marker2 and game_board[5]==marker2 and game_board[9]==marker2) or \
         (game_board[3]==marker2 and game_board[5]==marker2 and game_board[7]==marker2):
         print("Congratulations. Win the player2")
-        return True
+        return 2
     elif len(position_list)==0:
         print("Nobody win")
-        return True
+        return 3
 
 def try_again():
     """
-    #check if the players want to play again
+    #check do the players want to play again
     """
     play_or_not_play = ""
     while play_or_not_play not in["Y","N"]:
@@ -88,25 +88,26 @@ def try_again():
             print("Sorry wrong the character")
 
 def main():
-    """
+    """pyt
     main function
     """
-    game_board=["x","1","2","3","4","5","6","7","8","9"] #game board is filled positon numbers
-    position_list=list(range(1,10))#position list on board
-    game_on=False
+    game_board=["x","1","2","3","4","5","6","7","8","9"] #game board is filled numbers of position
+    position_list=list(range(1,10))#list of board position
+    game_on=True
     markers=marker_choice()#players will select character
     while game_on:
-        display_board(game_board)#display position board
+        display_board(game_board)#display board positions
         print("Player 1")
         game_board_and_position_list = \
         place_player_marker_choice(game_board,markers[0],position_list)#player one selects position
         game_board=game_board_and_position_list[0]#the board is filled of player'choice
-        position_list=game_board_and_position_list[1]#list free positions on the board
+        position_list=game_board_and_position_list[1]#list of free positions on the board
         display_board(game_board)#display updated position board
         end_game=win_check(game_board,markers[0],markers[1],position_list)#check if any of player win the game
-        if end_game:#if there is an end game,players can play again
+        if end_game in [1,2,3]:#if there is an end game,players can play again
             play_again=try_again()
             if play_again:
+                position_list=list(range(1,10))
                 game_board=["x","1","2","3","4","5","6","7","8","9"]
                 continue
             else:
@@ -117,11 +118,12 @@ def main():
         game_board=game_board_and_position_list[0] #the board is filled of player' choice
         position_list=game_board_and_position_list[1] #list free positions on board
         end_game=win_check(game_board,markers[0],markers[1],position_list) #check if any of player win the game
-        if end_game: # if there is an end game, players can play again
+        if end_game: #if there is an end game, players can play again
             play_again=try_again()
             if play_again:
                 game_board=["x","1","2","3","4","5","6","7","8","9"]
                 continue
             else:
                 break
+    return end_game
 main()
