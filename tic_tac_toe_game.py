@@ -124,6 +124,7 @@ def main():
                 game_board=["x","1","2","3","4","5","6","7","8","9"]
                 continue
             else:
+                print("Game over")
                 break
     return end_game #return who win, 1-means win player one,2-means win player two
 
