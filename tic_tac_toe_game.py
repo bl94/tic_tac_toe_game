@@ -125,5 +125,5 @@ def main():
                 continue
             else:
                 break
-    return end_game
+    return end_game #added line to make unittest
 main()
